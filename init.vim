@@ -1,5 +1,5 @@
 " Expand the home directory to an absolute path.
-let homeDir = expand('~')
+let homeDir=expand('~')
 
 " Find the desired VimPlug install location for different system configurations.
 if(has('win32') || has('win64'))
@@ -18,13 +18,13 @@ if empty(glob(expand(plugVim)))
         exec '!md '.shareDir.'\autoload'
 
         " Download VimPlug using PowerSHell.
-        exec '!powershell -command Invoke-WebRequest -Uri "'.plugUri.'" -OutFile '.plugVim.'"'
+        exec '!powershell -command Invoke-WebRequest -Uri "'.plugUri.'" -OutFile "'.plugVim.'"'
     else
         " Download VimPlug using curl.
-        exec '!curl -fLo '.plugVim.' --create-dirs '.plugUri
+        exec '!curl -fLo '.plugVim.' --create-dirs '.plugUri'
     endif
 
-	# Automatically run PlugInstall command.
+	" Automatically run PlugInstall command.
     autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 

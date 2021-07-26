@@ -1,4 +1,34 @@
-if has("win32")
+" Expand the home directory to an absolute path.
+let homeDir = expand('~')
+
+" Find the desired VimPlug install location for different system configurations.
+if(has('win32') || has('win64'))
+    let shareDir=homeDir.'\AppData\Local\nvim'
+    let plugVim=shareDir.'\autoload\plug.vim'
+else
+    let shareDir=homeDir.'/.local/share/nvim/site'
+    let plugVim=shareDir.'/autoload/plug.vim'
+endif
+
+" Url of the VimPlug script.
+let plugUri = 'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+if empty(glob(expand(plugVim)))
+    if has('win32') || has('win64')
+    	" Make sure the autoload directory has been created.
+        exec '!md '.shareDir.'\autoload'
+
+        " Download VimPlug using PowerSHell.
+        exec '!powershell -command Invoke-WebRequest -Uri "'.plugUri.'" -OutFile '.plugVim.'"'
+    else
+        " Download VimPlug using curl.
+        exec '!curl -fLo '.plugVim.' --create-dirs '.plugUri
+    endif
+
+	# Automatically run PlugInstall command.
+    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+if(has("win32") || has ("win64"))
   let $VIMRUNTIME='C:\tools\neovim\Neovim\share\nvim\runtime'
   let g:loaded_python_provider=0
   let g:python_host_prog=''

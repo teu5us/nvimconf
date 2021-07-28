@@ -21,7 +21,7 @@ if empty(glob(expand(plugVim)))
         exec '!powershell -command Invoke-WebRequest -Uri "'.plugUri.'" -OutFile "'.plugVim.'"'
     else
         " Download VimPlug using curl.
-        exec '!curl -fLo '.plugVim.' --create-dirs '.plugUri'
+        exec '!curl -fLo '.plugVim.' --create-dirs '.plugUri
     endif
 
 	" Automatically run PlugInstall command.

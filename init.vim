@@ -81,6 +81,7 @@ Plug 'glepnir/indent-guides.nvim'
 Plug 'yamatsum/nvim-cursorline'
 Plug 'akinsho/nvim-toggleterm.lua'
 Plug 'lukas-reineke/format.nvim'
+Plug 'direnv/direnv.vim'
 call plug#end()
 
 if (empty($TMUX))
